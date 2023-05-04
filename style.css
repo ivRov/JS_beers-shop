@@ -1,0 +1,131 @@
+*{
+    margin: 0;
+}
+.cardsHTML{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.main {
+    margin-left: 13%;
+    margin-top: 70px;
+    max-width: 30vw;
+}
+.logo {
+    width: 70%;
+    border-radius: 60%;
+}
+.header{
+    text-align: center;
+    padding-top: 50px;
+}
+.listOne{
+    width: 70%;
+    text-align: center;
+    border: 0.5px solid black;
+    padding-right:2%;
+    background: linear-gradient(blue,rgb(0, 0, 0));
+    color: aliceblue;
+    font-size: 1.5em;
+    border-radius: 5%;
+    height: 500px;
+}
+li{
+    list-style: none;
+    margin-top: 20px;
+}
+
+.nameApi {
+    margin-top: 15%;
+    text-overflow: ellipsis;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.hrefBuy {
+    margin-top: 60px;
+}
+.hrefBuy>a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    background-color: rgb(48, 206, 0);
+    border-radius: 20%;
+}
+
+.navBar {
+    text-align: center;
+    background-color: black;
+    padding-bottom: 15px;
+}
+.navBar-ul {
+    display: flex;
+}
+.navBar-ul>li {
+    margin-left: 23%;
+    margin-right: 13%;
+    font-size: 1.4em;
+    color: white;
+}
+
+.navBar-ul>li>a {
+    text-decoration: none;
+    color: white;
+    white-space: nowrap;
+}
+.close{
+    text-decoration: none;
+    color: red;
+    font-size: 40px;
+    float: right;
+    margin-right: 10px;
+    margin-top: -20px;
+    transform: rotate(45deg);
+}
+.shoppingMain {
+    text-align: center;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding-top: 10%;
+    background: rgba(0, 0, 0, 0.75);  
+    display: none;  
+}
+.shopping, h2 {
+    background: #ffffff;
+    opacity: 1;
+    max-width: 40%;
+    margin-left: 30%;
+}
+h2{
+    padding-top: 20px;
+}
+
+.card {
+    padding-bottom: 30px;
+}
+.sum {
+    padding-block: 20px;
+    color: rgb(13, 204, 61);
+}
+
+.shopCart {
+    margin: auto;
+    padding-top: 5px;
+}
+.ulShopCart {
+    display: flex;
+    width: 700px;
+    margin: auto;
+    border: solid 0.5px black;
+}
+.ulShopCart>li {
+    width: 100%;
+}
+.logoShop {
+    width: 90px;
+    border-radius: 30%;
+}
+
