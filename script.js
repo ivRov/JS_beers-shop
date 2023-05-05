@@ -32,7 +32,6 @@ fetch('https://random-data-api.com/api/v2/beers?size=10')
 // обращаемся к html добавляем туда див с карточками товара
             let cardsHTML = document.querySelector('.cardsHTML')
             let div = document.createElement("div")
-            div.className = 'a'
             div.innerHTML = card
 
             cardsHTML.appendChild(div) 
@@ -50,18 +49,18 @@ fetch('https://random-data-api.com/api/v2/beers?size=10')
         let counterMinus = elem.querySelector('.counterMinus')
          
         counterPlus.addEventListener('click',function() {
-            let e = cart.get(+id)
-             e += 1
-            cart.set(+id,+e)
-            counter.innerText = e
+            let getId = cart.get(+id)
+            getId += 1
+            cart.set(+id,+getId)
+            counter.innerText = getId
             
         })
         counterMinus.addEventListener("click", function() {
-            let e = cart.get(+id)
+            let getId = cart.get(+id)
             if(counter.innerText>0) {
-                e -= 1
-                cart.set(+id,+e)
-                counter.innerText = e
+                getId -= 1
+                cart.set(+id,+getId)
+                counter.innerText = getId
             }});  
      })
     
@@ -70,18 +69,18 @@ fetch('https://random-data-api.com/api/v2/beers?size=10')
 }).then(getObjBtnBuy => {
 // получаем в мар нужную карточку
     let btn = document.querySelectorAll('.hrefBuy')
-    btn.forEach(x => x.addEventListener('click', function(preventDef){
+    btn.forEach(el => el.addEventListener('click', function(preventDef){
         preventDef.preventDefault()
-        let parentsGetID = x.closest('.main')
+        let parentsGetID = el.closest('.main')
         let id = parentsGetID.id
-        let e = cart.get(+id)
-        let parentsForCounter = x.parentElement
+        let getId = cart.get(+id)
+        let parentsForCounter = el.parentElement
         let counter = parentsForCounter.querySelector('.counter')
         
-        if (e==0) {
-         e += 1
-         cart.set(+id,+e)
-         counter.innerText = e
+        if (getId==0) {
+            getId += 1
+            cart.set(+id,+getId)
+            counter.innerText = getId
         }
         
     })) 
