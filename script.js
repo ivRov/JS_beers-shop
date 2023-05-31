@@ -3,7 +3,6 @@
  let beersArr = []
 
 
-
 // запрос на сервер получаем данные и преобразуем в json
 fetch('https://random-data-api.com/api/v2/beers?size=10')
     .then(res => res.json())
@@ -16,7 +15,7 @@ fetch('https://random-data-api.com/api/v2/beers?size=10')
             <div class="main" id="${elem.id}">
                 <div class="listOne">
                     <ul id='listUl'>
-                        <li><img class="logo" src="https://static.politexpert.net/upload/images/2022/5/6/704458_full.jpeg" alt=""></li>
+                        <li><img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/NCI_Visuals_Food_Beer.jpg/1200px-NCI_Visuals_Food_Beer.jpg" alt="img"></li>
                         <li class="nameApi">${elem.name}</li>
                         <li class="alcoholApi">alc: ${elem.alcohol}</li>
                         <li class="idApi">coast: ${elem.id} tg</li>  
@@ -24,7 +23,7 @@ fetch('https://random-data-api.com/api/v2/beers?size=10')
                         <span class="counter">0</span>
                         <span><button class="counterPlus">+</button></span>
                         </li>
-                        <li class="hrefBuy" ><a class="hrefBuyBtn" href="#">Купить</a></li>
+                        <li class="hrefBuy" ><a class="hrefBuyBtn" href="#">buy</a></li>
                     </ul>
                 </div>
             </div>
@@ -32,16 +31,17 @@ fetch('https://random-data-api.com/api/v2/beers?size=10')
 // обращаемся к html добавляем туда див с карточками товара
             let cardsHTML = document.querySelector('.cardsHTML')
             let div = document.createElement("div")
+            div.className = 'topDivCart'
             div.innerHTML = card
 
             cardsHTML.appendChild(div) 
             cart.set(elem.id,0)
      })
      return beers
-// добавляем счетчик для каждого товара
+// счетчик товара
 }).then(CreateCounter => {
     let counts = document.querySelectorAll('#counts')
-     counts.forEach(elem => {
+        counts.forEach(elem => {
         let parents = elem.closest('.main')
         let id = parents.id
         let counter = elem.querySelector('.counter')
@@ -53,6 +53,7 @@ fetch('https://random-data-api.com/api/v2/beers?size=10')
             getId += 1
             cart.set(+id,+getId)
             counter.innerText = getId
+            counterSum()  
             
         })
         counterMinus.addEventListener("click", function() {
@@ -61,13 +62,14 @@ fetch('https://random-data-api.com/api/v2/beers?size=10')
                 getId -= 1
                 cart.set(+id,+getId)
                 counter.innerText = getId
-            }});  
+                counterSum()  
+            }});
+            
      })
-    
     return CreateCounter
   
 }).then(getObjBtnBuy => {
-// получаем в мар нужную карточку
+// получаем в мар нужную карточку 
     let btn = document.querySelectorAll('.hrefBuy')
     btn.forEach(el => el.addEventListener('click', function(preventDef){
         preventDef.preventDefault()
@@ -82,7 +84,9 @@ fetch('https://random-data-api.com/api/v2/beers?size=10')
             cart.set(+id,+getId)
             counter.innerText = getId
         }
-        
+        // счетчик в хедере
+        counterSum()
+     
     })) 
 })
 
@@ -91,12 +95,12 @@ let shopingCard = document.querySelector('.shopingCard')
 
 shopingCard.addEventListener('click',function() {
     let sumWithInitial = calculateSum()
-    let clear = document.querySelectorAll('.shopCart').forEach(el => el.remove())
+    document.querySelectorAll('.shopCart').forEach(el => el.remove())
     addCardToShop()
     let sum = document.querySelector('.sum')
     let card = document.querySelector('.card')
-    sumWithInitial > 0 ? sum.innerText = `Итого: ${sumWithInitial} tg` : sum.innerText =''
-    sumWithInitial > 0 ? card : card.innerHTML =`Корзина товаров <span><a href="#" class="close">+</a></span>`
+    sumWithInitial > 0 ? sum.innerText = `total: ${sumWithInitial} tg` : sum.innerText =''
+    sumWithInitial > 0 ? card : card.innerHTML =`shopping card <span><a href="#" class="close">+</a></span>`
     let shoppingMain = document.querySelector('.shoppingMain')
     shoppingMain.style.display ='block'
     let close = document.querySelector('.close')
@@ -116,42 +120,56 @@ function calculateSum() {
     },0) 
 }
 
-// поиск и отрисовка нужных карточек товара
+// поиск и отрисовка в корзине карточек товара
 function addCardToShop() {
     cart.forEach((counter,key) => {
         if(counter>0) {
            let buyCart = beersArr.find(({id}) => id == key)
-
             let divData = {
-                    png:'<img class="logoShop" src="https://static.politexpert.net/upload/images/2022/5/6/704458_full.jpeg" alt=""></img>',
+                    png:'<img class="logoShop" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/NCI_Visuals_Food_Beer.jpg/1200px-NCI_Visuals_Food_Beer.jpg" alt="img"></img>',
                     name:buyCart.name,
                     alc:buyCart.alcohol,
                     coast:buyCart.id,
                 }
+                
             let divCreatre = document.createElement('div')
                 divCreatre.className = 'shopCart'
                 divCreatre.innerHTML =
                 `
-                <ul class="ulShopCart">
+                <ul class="ulShopCart" id="${divData.coast}">
                     <li class="shopCartPng">${divData.png}</li>
                     <li class="shopCartName">Call: ${divData.name}</li>
                     <li class="shopCartAlc">Alc: ${divData.alc}</li>
-                    <li class="count">Count: ${counter}</li>
+                    <li class="count">
+                    Count: ${counter}
+                    <span> <button class="counterMinus">-</button> </span>
+                    <span><button class="counterPlus">+</button></span></li></li>
                     <li class="shopCartName">${divData.coast} tg</li>
+                    
                 </ul>
                 `
                 let shopping = document.querySelector('.shopping')
-                
                 shopping.append(divCreatre)
-               
+                
+            
     }
     })
 }
-  
-               
-    
-
-
+//   количество товаров в корзине
+function counterSum() {
+    let sumCarts = 0 ;
+    cart.forEach(el => {
+     return sumCarts+=el
+    })
+    let shoppingCardLink = document.querySelector('.shoppingCardLink')
+    shoppingCardLink.textContent = 'shopping card' + ' ' + sumCarts
+    if (sumCarts > 0) {
+     shoppingCardLink.style.color = 'yellow'
+    }
+    if (sumCarts == 0) {
+        shoppingCardLink.style.color = 'white'
+       }
+}     
 
 
 
