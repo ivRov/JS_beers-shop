@@ -142,15 +142,20 @@ function addCardToShop() {
                     <li class="shopCartAlc">Alc: ${divData.alc}</li>
                     <li class="count">
                     Count: ${counter}
-                    <span> <button class="counterMinus">-</button> </span>
-                    <span><button class="counterPlus">+</button></span></li></li>
+                    <span> <button class="countMinus">-</button> </span>
+                    <span><button class="countPlus">+</button></span></li></li>
                     <li class="shopCartName">${divData.coast} tg</li>
                     
                 </ul>
                 `
                 let shopping = document.querySelector('.shopping')
                 shopping.append(divCreatre)
-                
+
+                let countMinus = document.querySelectorAll('.countMinus')
+                countMinus.forEach(el => {
+                    let x = el.closest('.ulShopCart')
+                    
+                })
             
     }
     })

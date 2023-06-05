@@ -34,6 +34,7 @@
 #listUl {
     background-color: white;
     padding-block: 2rem;
+    padding-inline: auto;
 }
 li{
     list-style: none;
@@ -68,8 +69,8 @@ li{
     display: flex;
 }
 .navBar-ul>li {
-    margin-left: 23%;
-    margin-right: 13%;
+    margin-inline-end: auto;
+    margin-inline-start: auto;
     font-size: 1.4em;
     color: white;
 }
@@ -100,6 +101,9 @@ li{
     background: rgba(0, 0, 0, 0.75);  
     display: none;  
 }
+
+    
+
 .shopping, h2 {
     background: #ffffff;
     opacity: 1;
@@ -129,14 +133,33 @@ h2{
 }
 .ulShopCart {
     display: flex;
-    width: 700px;
+    width: 50vw;
     margin: auto;
 }
 .ulShopCart>li {
-    width: 100%;
+    width: 85%;
 }
 .logoShop {
     width: 90px;
     border-radius: 30%;
 }
+.shopCartName {
+    text-overflow: ellipsis;
+}
 
+@media  (max-width: 767px) {
+    .ulShopCart{
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .listOne{
+        width: 85vw;
+    }
+}
+
+@media (max-width: 1000px) {
+    .ulShopCart{
+        flex-direction: column;  
+    }
+}
